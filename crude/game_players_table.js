@@ -1,6 +1,6 @@
 if(typeof game_table=='undefined')game_table=[];
 //game_table=[];
-if('user' in qp)game_table.push({'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.ms:200,date:getDateTime()});
+if('user' in qp)game_table.push({'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime()});
 //fs.writeFileSync("",POST.code);
 // 
 qapsort(game_table,ex=>ex.ms);
