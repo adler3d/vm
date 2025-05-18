@@ -426,7 +426,7 @@ var split_stream=(stream,sep,cb,end)=>{
 
 var split_reader=(fn,sep,cb,end)=>split_stream(fs.createReadStream(fn,'binary'),sep,cb,end);
 
-var hosts={};var hosts_err_msg='';var need_coop_init=true;
+var hosts={};var hosts_err_msg='';var need_coop_init=false;
 
 var hosts_update=hosts=>{
   var conv=x=>{
@@ -774,7 +774,7 @@ var requestListener=(request,response)=>{
         s=s.split("<").join("&lt;").split(">").join("&gt;");
         (
           'bool,ifdef,endif,int,void,float,real,double,string,char,typedef,template,if,else,'+
-          'for,class,struct,inline,using,define,public,return,include,undef,auto,const,enum'
+          'for,class,struct,inline,using,define,public,return,include,undef,auto,const,enum,friend,operator,static'
         ).split(',').map(e=>s=s.split(e).join("<font color='blue'><b>"+e+"</b></font>"));
         return html("<pre>"+s);
       };
