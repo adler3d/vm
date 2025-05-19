@@ -10,7 +10,7 @@ if('user' in qp){
   if(game_table.length!=0&&!ok){fs.writeFileSync(fn,game_table.map(e=>json(e)).join("\n"));ok=true;}
   game_table.push(rec);
   fs.appendFileSync(fn,(ok?"\n":"")+JSON.stringify(rec));
-  return "["+getDateTime()+"]+ ok";
+  return "["+getDateTime()+"] ok";
 }
 let sort_and_update_place=arr=>{qapsort(arr,ex=>-ex.sec);arr.map((ex,i)=>ex['#']=i+1);};
 if('unique' in qp)
@@ -27,4 +27,4 @@ if('unique' in qp)
 }else{
   sort_and_update_place(game_table);
 }
-return ('user' in qp)?(('json' in qp)?JSON.stringify:maps2csv)(game_table):jstable(game_table);//html_utf8('<body>'+os.uptime()+'</body>');
+return ('user' in qp)?(('json' in qp)?JSON.stringify:maps2csv)(game_table):map2table(game_table);//html_utf8('<body>'+os.uptime()+'</body>');
