@@ -5,7 +5,7 @@ if(typeof game_table=='undefined'){
   if(ok)game_table=(fs.readFileSync(fn)+"").split("\n").map(e=>JSON.parse(e));
 }
 if('user' in qp){
-  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime()};
+  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime(),seed:POST.seed};
   let ok=fs.existsSync(fn);
   if(game_table.length!=0&&!ok){fs.writeFileSync(fn,game_table.map(e=>json(e)).join("\n"));ok=true;}
   game_table.push(rec);
