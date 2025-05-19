@@ -1057,12 +1057,12 @@ var requestListener=(request,response)=>{
         }
         if("/logs"==uri){
           var m=getmap(g_obj,'logs');
-          var func=e=>txt(inspect(e));
+          //var func=e=>txt(inspect(e));
+          //if('json' in qp)func=e=>txt(json(e));
+          //if('all' in qp)return func(m);
+          var func=maps2table;
           if('json' in qp)func=e=>txt(json(e));
-          if('all' in qp)return func(m);
-          var func=jstable;
-          if('json' in qp)func=e=>txt(json(e));
-          var arr=m['hostname' in qp?qp.hostname:os.hostname()];
+          //var arr=m['hostname' in qp?qp.hostname:os.hostname()];
           return func(arr);
         }
         var links2table=arr=>{
