@@ -6,8 +6,10 @@ if(typeof game_table=='undefined'){
 }
 let ok=fs.existsSync(fn);
 if(!ok&&game_table.length>0){fs.writeFileSync(fn,game_table.map(e=>json(e)).join("\n"));ok=true;}
-if('user' in qp){
-  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec*1.0:200,date:getDateTime(),seed:POST.seed*1,game:POST.game};
+let isInt=(n)=>Number(n)===n&&n%1===0;
+let isFloat=(n)=>(Number(n)===n&&n%1!==0)||isInt(n);
+if(('user' in qp)&&('sec' in qp)&&('date' in qp)&&('seed' in qp)&&('game' in qp)&&isInt(1*POST.seed)&&isFloat(1.0*POST.sec)){
+  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec*1.0,date:getDateTime(),seed:POST.seed*1,game:POST.game};
   game_table.push(rec);
   fs.appendFileSync(fn,(ok?"\n":"")+json(rec));
   return "["+getDateTime()+"] ok";
