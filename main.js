@@ -1061,7 +1061,7 @@ var requestListener=(request,response)=>{
           var json2=arr=>"[\n"+arr.map(e=>json(e)).join(",\n")+"]";
           if('json' in qp)func=e=>txt(json2(e));
           if('all' in qp)return func(m);
-          func=e=>html_utf8(maps2table);
+          func=e=>html_utf8(maps2table(e));
           if('json' in qp)func=e=>txt(json2(e));
           var arr=m['hostname' in qp?qp.hostname:os.hostname()];
           return func(arr);
