@@ -1,4 +1,8 @@
-if(typeof game_table=='undefined')game_table=[];
+if(typeof game_table=='undefined'){
+  game_table=[];
+  let ok=fs.existsSync(fn);
+  if(ok)game_table=(fs.readFileSync(fn)+"").split("\n").map(e=>JSON.parse(e));
+}
 if('user' in qp){
   let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime()};
   let fn="game_players_table.json";
