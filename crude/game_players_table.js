@@ -16,7 +16,8 @@ let sort_and_update_place=arr=>{qapsort(arr,ex=>-(ex.sec*1.0));arr.map((ex,i)=>e
 if('unique' in qp)
 {
   let m={};
-  game_table.map(ex=>{
+  let game=('game' in qp)POST.game:null;
+  game_table.filter(e=>game==null?true:e.game==game).map(ex=>{
     if((ex.user in m)&&m[ex.user].sec*1.0<ex.sec*1.0)return;
     m[ex.user]=ex;
   });
