@@ -4,12 +4,12 @@ if(typeof game_table=='undefined'){
   let ok=fs.existsSync(fn);
   if(ok)game_table=(fs.readFileSync(fn)+"").split("\n").map(e=>JSON.parse(e));
 }
+let ok=fs.existsSync(fn);
+if(!ok&&game_table.length>0){fs.writeFileSync(fn,game_table.map(e=>json(e)).join("\n"));ok=true;}
 if('user' in qp){
-  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime(),seed:POST.seed};
-  let ok=fs.existsSync(fn);
-  if(game_table.length!=0&&!ok){fs.writeFileSync(fn,game_table.map(e=>json(e)).join("\n"));ok=true;}
+  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime(),seed:POST.seed,game:POST.game};
   game_table.push(rec);
-  fs.appendFileSync(fn,(ok?"\n":"")+JSON.stringify(rec));
+  fs.appendFileSync(fn,(ok?"\n":"")+json(rec));
   return "["+getDateTime()+"] ok";
 }
 let sort_and_update_place=arr=>{qapsort(arr,ex=>-ex.sec);arr.map((ex,i)=>ex['#']=i+1);};
