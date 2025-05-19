@@ -12,7 +12,7 @@ if('user' in qp){
   fs.appendFileSync(fn,(ok?"\n":"")+json(rec));
   return "["+getDateTime()+"] ok";
 }
-let sort_and_update_place=arr=>{qapsort(arr,ex=>-ex.sec);arr.map((ex,i)=>ex['#']=i+1);};
+let sort_and_update_place=arr=>{qapsort(arr,ex=>-(ex.sec*1.0));arr.map((ex,i)=>ex['#']=i+1);};
 if('unique' in qp)
 {
   let m={};
@@ -23,7 +23,7 @@ if('unique' in qp)
   let arr=[];
   for(let k in m)arr.push(m[k]);
   sort_and_update_place(arr);
-  arr.length=Math.min(256,'n' in qp?POST.n|0:20);
+  //arr.length=Math.min(256,'n' in qp?POST.n|0:20);
   return ('csv' in qp)?maps2csv(arr):html_utf8(maps2table(arr));
 }else{
   sort_and_update_place(game_table);
