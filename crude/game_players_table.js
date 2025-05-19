@@ -1,7 +1,11 @@
 if(typeof game_table=='undefined')game_table=[];
 if('user' in qp){
-  game_table.push({'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime()});
-  fs.appendFileSync("game_players_table.json","\n"+JSON.stringify(game_table));
+  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime()};
+  let fn="game_players_table.json";
+  let ok=fs.existsSync(fn);
+  if(game_table.length!=0&&!ok){fs.writeFileSync(fn,game_table.map(e=>json(e)).join("\n"));}
+  game_table.push(rec);
+  fs.appendFileSync(fn,(ok?"\n":"")+JSON.stringify(rec));
 }
 let sort_and_update_place=arr=>{qapsort(arr,ex=>-ex.sec);arr.map((ex,i)=>ex['#']=i+1);};
 if('unique' in qp)
