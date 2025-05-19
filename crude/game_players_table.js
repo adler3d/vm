@@ -27,4 +27,4 @@ if('unique' in qp)
 }else{
   sort_and_update_place(game_table);
 }
-return ('user' in qp)?(('json' in qp)?JSON.stringify:maps2csv)(game_table):maps2table(game_table);//html_utf8('<body>'+os.uptime()+'</body>');
+return html_utf8(maps2table(game_table));
