@@ -7,7 +7,7 @@ if(typeof game_table=='undefined'){
 let ok=fs.existsSync(fn);
 if(!ok&&game_table.length>0){fs.writeFileSync(fn,game_table.map(e=>json(e)).join("\n"));ok=true;}
 if('user' in qp){
-  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec:200,date:getDateTime(),seed:POST.seed,game:POST.game};
+  let rec={'#':0,user:POST.user?POST.user:"nope",sec:POST.sec?POST.sec*1.0:200,date:getDateTime(),seed:POST.seed*1,game:POST.game};
   game_table.push(rec);
   fs.appendFileSync(fn,(ok?"\n":"")+json(rec));
   return "["+getDateTime()+"] ok";
@@ -17,13 +17,13 @@ if('unique' in qp)
 {
   let m={};
   game_table.map(ex=>{
-    if((ex.user in m)&&m[ex.user].sec<ex.sec)return;
+    if((ex.user in m)&&m[ex.user].sec*1.0<ex.sec*1.0)return;
     m[ex.user]=ex;
   });
   let arr=[];
   for(let k in m)arr.push(m[k]);
   sort_and_update_place(arr);
-  //arr.length=Math.min(256,'n' in qp?POST.n|0:20);
+  arr.length=Math.min(arr.length,256,'n' in qp?POST.n|0:20);
   return ('csv' in qp)?maps2csv(arr):html_utf8(maps2table(arr));
 }else{
   sort_and_update_place(game_table);
