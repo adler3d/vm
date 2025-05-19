@@ -37,5 +37,5 @@ var mainloop=setInterval(()=>{
   iter++;
   execSync('echo "'+iter+'">mainloop_iter.txt');
   qap_log('mainloop::iter = '+iter);
-  safe_spawn_with_cb("node",["main.js"],()=>need_restart=true);
+  safe_spawn_with_cb("node",["main.js","no_sync"],()=>need_restart=true);
 },500);
