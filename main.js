@@ -705,7 +705,8 @@ var requestListener=(request,response)=>{
     '.zip':  "application/zip",
     '.tar':  "application/x-tar",
     '.tgz':  "application/octet-stream",
-    '.gz':  "application/gzip"
+    '.gz':  "application/gzip",
+    '.wasm":"application/wasm",
   };
   var on_request_end=(cb)=>{
     var body=[];
