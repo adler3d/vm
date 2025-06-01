@@ -28,7 +28,7 @@ if('unique' in qp)
   for(let k in m)arr.push(m[k]);
   sort_and_update_place(arr);
   arr.length=Math.min(arr.length,256,'n' in qp?POST.n|0:20);
-  return ('csv' in qp)?maps2csv(arr):html_utf8(maps2table(arr));
+  return ('csv' in qp)?(arr.length?maps2csv(arr):"empty"):html_utf8(maps2table(arr));
 }else{
   sort_and_update_place(game_table);
 }
