@@ -690,6 +690,7 @@ var requestListener=(request,response)=>{
     return;
   }
   var contentTypesByExtension={
+    '.htm': "text/html", // fix for igdc.link
     '.html': "text/html", // "/eval.html" "/eval_hljs.html"
     '.css':  "text/css",
     '.js':   "text/javascript",
